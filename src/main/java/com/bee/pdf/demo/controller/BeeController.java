@@ -1,5 +1,6 @@
 package com.bee.pdf.demo.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,12 +32,14 @@ import com.bee.pdf.demo.generator.PdfGenerator;
 import com.bee.pdf.demo.service.BeeService;
 import com.bee.pdf.demo.service.IExcelDataService;
 import com.bee.pdf.demo.service.IFileUploadService;
+import com.itextpdf.html2pdf.HtmlConverter;
 import com.lowagie.text.DocumentException;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
-@Controller
+@RestController
+@RequestMapping("/api/app")
 @Slf4j
 public class BeeController {
 
@@ -138,6 +142,13 @@ public class BeeController {
 		//PdfGenerator generator = new PdfGenerator();
 		PayrollPdfGenerator generator = new PayrollPdfGenerator();
 		generator.generate(bee, null, response);
+	}
+	
+	@RequestMapping(value="/exportHtmlToPDF", method = RequestMethod.GET)
+	public ModelAndView generateHtmlToPDF() throws IOException {
+		log.info("*** Inside generateHtmlToPDF "+new File("pdf-input.html").getAbsolutePath());
+		return new ModelAndView("redirect:pdf-input.html");
+		//HtmlConverter.convertToPdf(new File("pdf-input.html"),new File("demo-html.pdf"));
 	}
 	
 	@RequestMapping(value = "/deleteBee", method = {RequestMethod.GET, RequestMethod.POST})

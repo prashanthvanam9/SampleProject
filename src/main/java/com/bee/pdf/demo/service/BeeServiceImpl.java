@@ -29,6 +29,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bee.pdf.demo.entity.Bees;
+import com.bee.pdf.demo.exception.BeeAlreadyExistsException;
+import com.bee.pdf.demo.exception.BeeNotFoundException;
 import com.bee.pdf.demo.repository.BeeRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +54,12 @@ public class BeeServiceImpl implements BeeService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		/*
+		 * var existingBee = beeRepo.findById(bee.getId()).orElse(null); if(existingBee
+		 * != null) { throw new
+		 * BeeAlreadyExistsException("Bee already exists with the given ID."); }
+		 */
 		beeRepo.save(bee);
 		log.info("***Inside addBee ::: Bee Saved!"+bee.toString());
 	}
@@ -61,9 +69,11 @@ public class BeeServiceImpl implements BeeService{
 		return beeRepo.findAll();
 	}
 	
+	@Override
 	public Bees findBeeById(Long id){
 		log.info("***Inside findBeeById : "+id);
 		return beeRepo.findBeeById(id);
+				 // .orElseThrow() -> new BeeNotFoundException("Bee not found with the given ID.");
 	}
 	
 	public void removeBeeById(Long id) {

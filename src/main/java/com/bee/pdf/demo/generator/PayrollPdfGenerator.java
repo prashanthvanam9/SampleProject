@@ -46,10 +46,42 @@ public class PayrollPdfGenerator {
 			document.add(para1);
 		}
 		
+		/* Header Begining */
+		PdfPTable table0 = new PdfPTable(1);
+		table0.setWidthPercentage(100f);
+		table0.setWidths(new int[] {3});
+		table0.setSpacingBefore(5);
+		//table.setHeaderRows(2);
+		
+		PdfPCell cell0 = new PdfPCell();
+		//cell0.setBackgroundColor(CMYKColor.ORANGE);
+		cell0.setPadding(85);
+		cell0.setPadding(82);
+		cell0.setHorizontalAlignment(60);
+		
+		Font font0 = FontFactory.getFont(FontFactory.TIMES_BOLD);
+		font0.setColor(CMYKColor.BLACK);
+		
+		cell0.setPhrase(new Phrase("Bee Company</n>", font0));
+		cell0.setPhrase(new Phrase("Address1", font0));
+		cell0.setPhrase(new Phrase("Landmark", font0));
+		cell0.setPhrase(new Phrase("Bee Company</n>State", font0));
+		
+		table0.addCell(cell0);
+		/*
+		 * cell.setPhrase(new Phrase("Bee Name",font)); table0.addCell(cell);
+		 * cell.setPhrase(new Phrase("Email", font)); table0.addCell(cell);
+		 * cell.setPhrase(new Phrase("Mobile No#", font)); table0.addCell(cell);
+		 * cell.setPhrase(new Phrase("DOJ", font)); table0.addCell(cell);
+		 */
+		document.add(table0);
+		/* Header End */
+		
 		PdfPTable table = new PdfPTable(5);
 		table.setWidthPercentage(100f);
 		table.setWidths(new int[] {3,3,3,3,3});
 		table.setSpacingBefore(5);
+		//table.setHeaderRows(2);
 		
 		PdfPCell cell = new PdfPCell();
 		cell.setBackgroundColor(CMYKColor.GRAY);

@@ -210,7 +210,7 @@
 						<td><input disabled="disabled" id="leaves" name="leaves" type="text" value="${1}" /></td>
 					</tr>
 					<tr>
-						<td><span style="font-family:verdana,geneva,sans-serif;"><span style="font-size:12px;"><a href="exportBeePayroll?id=${beeInfo.id}">Download Payroll</a></span></span></td>
+						<td><span style="font-family:verdana,geneva,sans-serif;"><span style="font-size:12px;"><%--a href="exportHtmlToPDF"--%><a href="exportBeePayroll?id=${beeInfo.id}">Download Payroll</a></span></span></td>
 						<td>&nbsp;</td>
 					</tr>
 					
